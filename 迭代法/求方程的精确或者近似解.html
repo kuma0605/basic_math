@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getSqureRoot(n, deltaThreshold, maxTry){
+            /**
+            * @Description: 计算大于1的正整数之平方根
+            * @param n-待求的数，deltaThreshold-误差的阈值，maxTry-二分查找的最大次数
+            * @return double-平方根的解
+            */
+            if(n<=1){
+                return -1;
+            }
+
+            let min =1; max=n;
+            for(let i=0; i<maxTry; i++){
+                let middle = (min+max)/2;
+                let square = middle*middle;
+                let delta = Math.abs(square/n -1);
+                if(delta<=deltaThreshold){
+                    return middle;
+                }else{
+                    if(square>n){
+                        max = middle;
+                    }else{
+                        min = middle;
+                    }
+                }
+            }
+
+            return -2;
+        }
+
+        //测试代码
+        let number = 10;
+        let squareRoot = getSqureRoot(number, 0.000001, 10000)
+        if(squareRoot==-1){
+            console.log("请输入大于1的整数")
+        }else if(squareRoot==-2){
+            console.log("未找到解")
+        }else{
+            console.log(`${number}的平方根是${squareRoot}`)
+        }
+    </script>
+</body>
+</html>
