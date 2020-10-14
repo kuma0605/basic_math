@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function search(dictionary, wordToFind){
+            /** 
+             * @Description: 查找某个单词是否在字典里出现 
+             * @param dictionary-排序后的字典, wordToFind-待查的单词 
+             * @return boolean-是否发现待查的单词 
+            */
+            if(dictionary == null){
+                return false;
+            }
+            if(dictionary.length==0){
+                return false;
+            }
+            let left =0, right=dictionary.length-1;
+            while(left<=right){
+                let middle = (left+right)/2;
+                if(dictionary[middle]===wordToFind){
+                    return true;
+                }else{
+                    //compareTo 要自己实现
+                    //所以这个函数只是思路
+                    if(dictionary[middle].compareTo(wordToFind)>0){
+                        //目前中间比目标大，right要减小
+                        right= middle-1;
+                    }else{
+                        //目前中间值小于目标，left要增大
+                        left = middle+1;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
