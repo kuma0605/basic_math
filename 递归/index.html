@@ -1,39 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        let rewards = [1,2,5,10]; //四种面额的纸币
-        function calc(totalReward, result){
+        let rewards = [1, 2, 5, 10]; //四种面额的纸币
+        function calc(totalReward, result) {
             /** 
              * @Description: 使用函数的递归（嵌套）调用，找出所有可能的奖赏组合
              * @param totalReward-奖赏总金额，result-保存当前的解 
              * @return void 
             */
             // 当totalReward = 0时，证明它是满足条件的解，结束嵌套调用，输出解
-            if(totalReward == 0){
+            if (totalReward == 0) {
                 console.log(result)
                 return;
             }
             // 当totalReward < 0时，证明它不是满足条件的解，不输出
-            else if(totalReward<0){
+            else if (totalReward < 0) {
                 return;
-            }else{
-                for(let i=0; i<rewards.length; i++){
+            } else {
+                for (let i = 0; i < rewards.length; i++) {
                     let newResult = [].concat(result); // 由于有4种情况，需要clone当前的解并传入被调用的函数
                     newResult.push(rewards[i]);  // 记录当前的选择，解决一点问题
-                    calc(totalReward-rewards[i], newResult); // 剩下的问题，留给嵌套调用去解决
+                    calc(totalReward - rewards[i], newResult); // 剩下的问题，留给嵌套调用去解决
                 }
             }
         }
 
+        //求解思路
+        //将复杂的问题，每次都解决一点点，
+        //并将剩下的任务转化成为更简单的问题等待下次求解，
+        //如此反复，直到最简单的形式。
+
+        //个人理解
+        //递归到最后totalReward==0，代表得到正确奖赏组合，输出该组合
+        //totalReward<0，就说明该方案非正确组合，不输出
+
         let totalReward = 10;
         calc(totalReward, [])
-        
+
     </script>
 </body>
+
 </html>
